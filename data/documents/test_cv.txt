@@ -1,0 +1,4 @@
+Ad Soyad: Test Kullanıcı
+Beceriler: Python, Django, SQL, Git
+Projeler: Blog uygulaması, masaüstü çalışma takip uygulaması
+Hedef: Backend Developer
