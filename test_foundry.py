@@ -1,6 +1,6 @@
 from openai import OpenAI
 
-BASE_URL = "http://127.0.0.1:53244/v1"
+BASE_URL = "http://127.0.0.1:51754/v1"
 MODEL_NAME = "qwen3-1.7b-generic-cpu"
 
 def main() -> None:
