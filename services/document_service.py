@@ -1,10 +1,8 @@
-<<<<<<< HEAD
 from pathlib import Path
 from pypdf import PdfReader
 
 
 def extract_text_from_txt(file_path: str) -> str:
-    """TXT dosyasındaki metni UTF-8 olarak okur."""
     path = Path(file_path)
 
     if not path.exists():
@@ -14,26 +12,25 @@ def extract_text_from_txt(file_path: str) -> str:
 
 
 def extract_text_from_pdf(file_path: str) -> str:
-    """PDF dosyasındaki yazıları çıkarır."""
     path = Path(file_path)
 
     if not path.exists():
         raise FileNotFoundError(f"Dosya bulunamadı: {file_path}")
 
     reader = PdfReader(str(path))
-    pages = []
+
+    text_parts = []
 
     for page in reader.pages:
         page_text = page.extract_text()
 
         if page_text:
-            pages.append(page_text)
+            text_parts.append(page_text)
 
-    return "\n".join(pages)
+    return "\n".join(text_parts)
 
 
 def extract_text(file_path: str) -> str:
-    """Dosya uzantısına göre uygun okuma fonksiyonunu çalıştırır."""
     suffix = Path(file_path).suffix.lower()
 
     if suffix == ".txt":
@@ -43,21 +40,15 @@ def extract_text(file_path: str) -> str:
         return extract_text_from_pdf(file_path)
 
     raise ValueError("Yalnızca .txt ve .pdf dosyaları destekleniyor.")
-=======
+
+
 def split_text(
     text: str,
     chunk_size: int = 500,
     overlap: int = 80,
 ) -> list[str]:
     """
-    Uzun bir metni küçük parçalara (chunk) böler.
-
-    chunk_size:
-        Her parçanın yaklaşık karakter uzunluğu.
-
-    overlap:
-        Ardışık parçaların bir miktar ortak metin
-        içermesini sağlar.
+    Uzun bir metni küçük parçalara böler.
     """
 
     if not text.strip():
@@ -68,17 +59,13 @@ def split_text(
             "overlap, chunk_size değerinden küçük olmalıdır."
         )
 
-    # Fazla boşlukları ve satır sonlarını temizle
     cleaned_text = " ".join(text.split())
 
     chunks = []
-
     start = 0
 
     while start < len(cleaned_text):
-
         end = start + chunk_size
-
         chunk = cleaned_text[start:end].strip()
 
         if chunk:
@@ -87,4 +74,3 @@ def split_text(
         start += chunk_size - overlap
 
     return chunks
->>>>>>> feature/rahime

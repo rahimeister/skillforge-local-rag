@@ -1,6 +1,6 @@
 from openai import OpenAI
 
-BASE_URL = "http://127.0.0.1:61652/v1"
+BASE_URL = "http://127.0.0.1:64789/v1"
 EMBEDDING_MODEL = "qwen3-embedding-0.6b-generic-cpu"
 
 

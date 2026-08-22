@@ -116,3 +116,38 @@ def delete_chunks_by_source(source: str):
 
     connection.commit()
     connection.close()
+
+
+def get_chunks_by_source(source: str):
+    """
+    Yalnızca belirtilen kaynağa ait chunk'ları getirir.
+    """
+
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    cursor.execute(
+        """
+        SELECT id, source, chunk_text, embedding
+        FROM document_chunks
+        WHERE source = ?
+        """,
+        (source,),
+    )
+
+    rows = cursor.fetchall()
+    connection.close()
+
+    results = []
+
+    for row in rows:
+        results.append(
+            {
+                "id": row[0],
+                "source": row[1],
+                "text": row[2],
+                "embedding": json.loads(row[3]),
+            }
+        )
+
+    return results
